@@ -8,7 +8,7 @@ const io = socketIO(server);
 
 // Set up Express server
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + 'https://commmunity-pagebus.onrender.com/');
 });
 
 // Set up Socket.IO
