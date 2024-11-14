@@ -1,31 +1,33 @@
 const express = require('express');
 const http = require('http');
-const socketIO = require('socket.io');
+const { Server } = require('socket.io');
+const cors = require('cors');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIO(server);
-
-// Set up Express server
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + 'https://commmunity-pagebus.onrender.com/');
+const io = new Server(server, {
+  cors: {
+    origin: '*', // Adjust as needed for security
+    methods: ['GET', 'POST']
+  }
 });
 
-// Set up Socket.IO
+app.use(cors());
+
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log('A user connected:', socket.id);
 
   socket.on('chat message', (msg) => {
-    console.log('message: ' + msg);
-    io.emit('chat message', msg);
+    console.log('Message received:', msg);
+    io.emit('chat message', msg); // Broadcast to all connected clients
   });
 
   socket.on('disconnect', () => {
-    console.log('user disconnected');
+    console.log('User disconnected:', socket.id);
   });
 });
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server listening on port ${PORT}`);
 });
