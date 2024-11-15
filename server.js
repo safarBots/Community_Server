@@ -8,7 +8,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: process.env.NODE_ENV === 'production' 
-      ? 'https://your-domain.com' 
+      ? 'https://commmunity-pagebus.onrender.com' 
       : '*',
     methods: ['GET', 'POST']
   }
