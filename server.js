@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'https://commmunity-pagebus.onrender.com/community_page%20copy/index.html', // Adjust as needed for security
+    origin: 'https://commmunity-pagebus.onrender.com', // Adjust as needed for security
     methods: ['GET', 'POST']
   }
 });
